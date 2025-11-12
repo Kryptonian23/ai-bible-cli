@@ -1,0 +1,99 @@
+import OpenAI from "openai";
+import readlineSync from "readline-sync";
+import dotenv from "dotenv";
+import fs from "fs";
+
+dotenv.config();
+
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+// Load and flatten Bible JSON
+const rawBible = JSON.parse(fs.readFileSync("./bible.json", "utf8"));
+
+const verses = [];
+rawBible.forEach((book) => {
+  book.chapters.forEach((chapter, cIndex) => {
+    chapter.forEach((text, vIndex) => {
+      verses.push({
+        book: book.name,
+        chapter: cIndex + 1,
+        verse: vIndex + 1,
+        reference: `${book.name} ${cIndex + 1}:${vIndex + 1}`,
+        text,
+      });
+    });
+  });
+});
+
+function searchVerses(query, limit = 5) {
+  const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+
+  const scored = verses
+    .map((v) => {
+      const t = v.text.toLowerCase();
+      let score = 0;
+      for (const term of terms) {
+        if (t.includes(term)) score++;
+      }
+      return { v, score };
+    })
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score);
+
+  return scored.slice(0, limit).map((x) => x.v);
+}
+
+console.log("🙏 Welcome to the AI Bible. Ask any question about Scripture.");
+console.log('Type "exit" to quit.\n');
+
+async function main() {
+  while (true) {
+    const question = readlineSync.question("You: ");
+
+    if (!question.trim()) continue;
+    if (question.toLowerCase() === "exit") {
+      console.log("Goodbye. God bless you.");
+      break;
+    }
+
+    // find relevant verses locally
+    const hits = searchVerses(question, 6);
+    const context =
+      hits.length === 0
+        ? "No specific verses were found in the local search."
+        : hits
+            .map((h) => `${h.reference} — ${h.text}`)
+            .join("\n");
+
+    try {
+      const response = await openai.chat.completions.create({
+        model: "gpt-4o-mini",
+        temperature: 0.4,
+        messages: [
+          {
+            role: "system",
+            content:
+              "You are an AI Bible assistant. Use ONLY the verses provided in the context below " +
+              "and standard Christian biblical understanding. Always:\n" +
+              "1) Give a short explanation.\n" +
+              "2) Then list the verses you used with Book chapter:verse.\n" +
+              "If the context has no relevant verses, say that clearly.",
+          },
+          {
+            role: "user",
+            content:
+              `Question:\n${question}\n\n` +
+              `Relevant verses (from local Bible):\n${context}`,
+          },
+        ],
+      });
+
+      const answer = response.choices[0].message.content.trim();
+      console.log("\nAI Bible:\n" + answer + "\n");
+    } catch (err) {
+      console.error("\n[Error talking to OpenAI]", err.message, "\n");
+    }
+  }
+}
+
+main();
