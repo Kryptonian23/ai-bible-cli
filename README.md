@@ -23,4 +23,7 @@
 - 🛡️ No secrets committed (.env ignored)
 
 ## 📸 Demo
-Add a short GIF or screenshot here later:
+<p align="center">
+  <img src="assets/demo.gif" alt="AI Bible CLI Demo" width="640"/>
+</p>
+
