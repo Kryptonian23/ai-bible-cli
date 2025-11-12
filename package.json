@@ -1,5 +1,5 @@
 {
-  "name": "helpful-ai-cli",
+  "name": "ai-bible-cli",
   "version": "1.0.0",
   "main": "bible-ai.js",
   "dependencies": {
