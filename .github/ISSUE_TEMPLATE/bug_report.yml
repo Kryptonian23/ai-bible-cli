@@ -1,0 +1,17 @@
+name: Bug report
+description: File a bug report
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: textarea
+    attributes:
+      label: Describe the bug
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+  - type: textarea
+    attributes:
+      label: Logs / output
+  - type: input
+    attributes:
+      label: Node version
