@@ -1,0 +1,22 @@
+<svg width="1200" height="320" viewBox="0 0 1200 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1f2937"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="320" fill="url(#g)"/>
+  <g transform="translate(80,90)">
+    <circle cx="60" cy="70" r="46" fill="#10b981" opacity="0.15"/>
+    <text x="28" y="86" font-size="56" font-family="Segoe UI Emoji, Apple Color Emoji, Noto Color Emoji">🕊️</text>
+    <text x="130" y="60" fill="#e5e7eb" font-size="40" font-family="Inter,Segoe UI,Arial,sans-serif" font-weight="700">AI Bible CLI</text>
+    <text x="130" y="108" fill="#9ca3af" font-size="20" font-family="Inter,Segoe UI,Arial,sans-serif">
+      Ask questions • Get Scripture-backed answers with citations
+    </text>
+  </g>
+  <g transform="translate(1080,36)" opacity="0.08" fill="#10b981">
+    <circle cx="40" cy="40" r="40"/>
+    <circle cx="-40" cy="140" r="28"/>
+    <circle cx="-100" cy="40" r="18"/>
+  </g>
+</svg>
