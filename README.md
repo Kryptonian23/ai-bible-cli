@@ -30,3 +30,7 @@
   <img src="assets/demo.gif" alt="AI Bible CLI Demo" width="640"/>
 </p>
 
+## 💼 Commercial Licensing
+If you would like to use AI Bible CLI for any commercial purpose — such as hosting it online, selling access, or integrating it into a paid app or service —  
+please contact **Michael Shants** at [shants.tech@gmail.com] to obtain a commercial license or partnership agreement.
+
