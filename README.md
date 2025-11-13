@@ -1,4 +1,7 @@
-<h1 align="center">🕊️ AI Bible CLI</h1>
+<p align="center">
+  <img src="https://github.com/Kryptonian23/ai-bible-cli/blob/main/assets/banner.svg" alt="AI Bible CLI Banner" width="100%">
+</p>
+
 
 <p align="center">
   <a href="https://github.com/Kryptonian23/ai-bible-cli"><img alt="Repo" src="https://img.shields.io/badge/GitHub-ai--bible--cli-181717?logo=github"></a>
